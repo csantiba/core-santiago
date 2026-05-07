@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suscripci&oacute;n - CORE Metropolitano</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .suscripcion-container { max-width: 550px; margin: 2rem auto; }
+    .suscripcion-card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 2.5rem; border-top: 4px solid var(--primary-light); }
+    .suscripcion-card h2 { color: var(--primary); font-size: 1.4rem; margin-bottom: 0.5rem; }
+    .suscripcion-card .descripcion { color: var(--text-light); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text); margin-bottom: 0.3rem; }
+    .form-group input { width: 100%; padding: 0.7rem 1rem; border: 1px solid var(--border); border-radius: 6px; font-size: 0.95rem; transition: border-color 0.2s, box-shadow 0.2s; }
+    .form-group input:focus { outline: none; border-color: var(--primary-light); box-shadow: 0 0 0 3px rgba(41,128,185,0.15); }
+    .form-group .hint { font-size: 0.78rem; color: var(--text-light); margin-top: 0.2rem; }
+    .btn-suscribir { width: 100%; padding: 0.8rem; background: var(--primary-light); color: white; border: none; border-radius: 6px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+    .btn-suscribir:hover { background: var(--primary); }
+    .btn-suscribir:disabled { background: #bdc3c7; cursor: not-allowed; }
+    .mensaje { margin-top: 1.2rem; padding: 1rem; border-radius: 6px; font-size: 0.9rem; display: none; }
+    .mensaje.exito { display: block; background: #d5f5e3; color: #1e8449; border: 1px solid #a9dfbf; }
+    .mensaje.error { display: block; background: #fadbd8; color: #c0392b; border: 1px solid #f5b7b1; }
+    .mensaje.info { display: block; background: #eaf2f8; color: #1a5276; border: 1px solid #d4e6f1; }
+    .privacidad { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.78rem; color: var(--text-light); line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <h1>Consejo Regional Metropolitano de Santiago</h1>
+    <p>Visor ciudadano de actas, acuerdos y actividad del CORE Metropolitano</p>
+    <nav>
+      <a href="/">Inicio</a>
+      <a href="/sesiones.html">Sesiones</a>
+      <a href="/acuerdos.html">Acuerdos</a>
+      <a href="/comisiones.html">Comisiones</a>
+      <a href="/asistencia.html">Asistencia</a>
+      <a href="/varios.html">Varios</a>
+      <a href="/suscripcion.html" class="active">Suscripci&oacute;n</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="suscripcion-container">
+      <div class="suscripcion-card">
+        <h2>&#128233; Suscr&iacute;bete a las notificaciones</h2>
+        <p class="descripcion">
+          Recibe un aviso por correo electr&oacute;nico cada vez que se carguen nuevas actas
+          del Consejo Regional Metropolitano de Santiago en el sistema. As&iacute; podr&aacute;s
+          estar al d&iacute;a con las decisiones, acuerdos y temas tratados en las sesiones plenarias
+          del CORE.
+        </p>
+
+        <form id="formSuscripcion">
+          <div class="form-group">
+            <label for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" name="nombre" required placeholder="Ej: Mar&iacute;a P&eacute;rez Gonz&aacute;lez" autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label for="email">Correo electr&oacute;nico</label>
+            <input type="email" id="email" name="email" required placeholder="Ej: maria@correo.cl" autocomplete="email">
+            <div class="hint">No compartiremos tu correo con terceros.</div>
+          </div>
+          <button type="submit" class="btn-suscribir" id="btnSuscribir">Suscribirme</button>
+        </form>
+
+        <div id="mensaje" class="mensaje"></div>
+
+        <div class="privacidad">
+          Tu informaci&oacute;n ser&aacute; utilizada &uacute;nicamente para enviarte notificaciones
+          sobre nuevas actas del Consejo Regional Metropolitano de Santiago. Podr&aacute;s cancelar
+          tu suscripci&oacute;n en cualquier momento mediante el enlace incluido en cada correo.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('formSuscripcion').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('btnSuscribir');
+      const msg = document.getElementById('mensaje');
+      const nombre = document.getElementById('nombre').value.trim();
+      const email = document.getElementById('email').value.trim();
+
+      btn.disabled = true;
+      btn.textContent = 'Enviando...';
+      msg.className = 'mensaje';
+      msg.style.display = 'none';
+
+      try {
+        const res = await fetch('/api/suscripcion', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nombre, email }),
+        });
+        const data = await res.json();
+
+        if (data.ok) {
+          msg.className = 'mensaje exito';
+          msg.textContent = data.mensaje;
+          msg.style.display = 'block';
+          document.getElementById('formSuscripcion').reset();
+        } else {
+          msg.className = 'mensaje error';
+          msg.textContent = data.error || 'Error al procesar la suscripción.';
+          msg.style.display = 'block';
+        }
+      } catch (err) {
+        msg.className = 'mensaje error';
+        msg.textContent = 'Error de conexión. Intenta nuevamente.';
+        msg.style.display = 'block';
+      }
+
+      btn.disabled = false;
+      btn.textContent = 'Suscribirme';
+    });
+  </script>
+</body>
+</html>
