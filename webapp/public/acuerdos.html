@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acuerdos - CORE Metropolitano</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>Consejo Regional Metropolitano de Santiago</h1>
+    <p>Visor ciudadano de actas, acuerdos y actividad del CORE Metropolitano</p>
+    <nav>
+      <a href="/">Inicio</a>
+      <a href="/sesiones.html">Sesiones</a>
+      <a href="/acuerdos.html" class="active">Acuerdos</a>
+      <a href="/comisiones.html">Comisiones</a>
+      <a href="/asistencia.html">Asistencia</a>
+      <a href="/varios.html">Varios</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <form class="filters" id="filtros">
+      <div class="field">
+        <label>Buscar</label>
+        <input type="text" id="q" placeholder="Palabra clave...">
+      </div>
+      <div class="field">
+        <label>Categor&iacute;a</label>
+        <select id="categoria"><option value="">Todas</option></select>
+      </div>
+      <div class="field">
+        <label>Fuente</label>
+        <select id="fuente">
+          <option value="">Todas</option>
+          <option value="FNDR">FNDR</option>
+          <option value="FRIL">FRIL</option>
+          <option value="6%">6%</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Desde</label>
+        <input type="date" id="fecha_desde">
+      </div>
+      <div class="field">
+        <label>Hasta</label>
+        <input type="date" id="fecha_hasta">
+      </div>
+      <button type="submit" class="btn">Filtrar</button>
+      <button type="button" class="btn btn-outline" id="limpiar">Limpiar</button>
+    </form>
+
+    <div id="stats" class="stats"></div>
+    <div id="contenido" class="loading">Cargando acuerdos...</div>
+  </div>
+
+  <script type="module" src="/js/acuerdos.js"></script>
+</body>
+</html>

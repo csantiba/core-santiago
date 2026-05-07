@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consejo Regional Metropolitano de Santiago - Visor de Actas</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .hero h2 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .hero p { font-size: 1.05rem; opacity: 0.9; max-width: 750px; margin: 0 auto; line-height: 1.7; }
+    .hero .fuente {
+      margin-top: 1.5rem;
+      padding: 1rem 1.5rem;
+      background: rgba(255,255,255,0.12);
+      border-radius: 8px;
+      font-size: 0.88rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+    .dashboard-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    .dash-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.6rem 1.3rem;
+      text-align: center;
+      border-top: 4px solid var(--primary-light);
+      transition: transform 0.2s;
+    }
+    .dash-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
+    .dash-card .icon { font-size: 1.8rem; margin-bottom: 0.4rem; }
+    .dash-card .num { font-size: 2.1rem; font-weight: 800; color: var(--primary); word-break: break-word; }
+    .dash-card .num.monto { font-size: 1.5rem; }
+    .dash-card .label { font-size: 0.8rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 0.3rem; }
+    .dash-card .sub { font-size: 0.78rem; color: var(--text-light); margin-top: 0.2rem; }
+    .dash-card.accent { border-top-color: var(--success); }
+    .dash-card.accent .num { color: var(--success); }
+    .dash-card.warn { border-top-color: var(--warning); }
+    .dash-card.warn .num { color: var(--warning); }
+
+    .section-title {
+      font-size: 1.15rem;
+      color: var(--primary);
+      margin: 2rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .anio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    .anio-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .anio-card .year { font-size: 1.7rem; font-weight: 800; color: var(--primary-light); }
+    .anio-card .details { font-size: 0.88rem; color: var(--text); }
+    .anio-card .details span { display: block; color: var(--text-light); font-size: 0.82rem; }
+
+    .ultimas-list { display: flex; flex-direction: column; gap: 0.8rem; }
+    .ultima-item {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1rem 1.5rem;
+      border-left: 4px solid var(--primary-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .ultima-item .info { flex: 1; }
+    .ultima-item .info h4 { font-size: 0.95rem; margin-bottom: 0.2rem; }
+    .ultima-item .info h4 a { color: var(--primary); text-decoration: none; }
+    .ultima-item .info h4 a:hover { text-decoration: underline; }
+    .ultima-item .info .date { font-size: 0.82rem; color: var(--text-light); }
+    .ultima-item .info .resumen { font-size: 0.85rem; color: #555; margin-top: 0.3rem; }
+    .ultima-item .acuerdos-count { text-align: center; min-width: 60px; }
+    .ultima-item .acuerdos-count .n { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+    .ultima-item .acuerdos-count .l { font-size: 0.7rem; color: var(--text-light); text-transform: uppercase; }
+
+    .accesos { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+    .acceso-btn {
+      flex: 1;
+      min-width: 170px;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.1rem 1.2rem;
+      text-align: center;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.92rem;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    .acceso-btn:hover { border-color: var(--primary-light); transform: translateY(-2px); }
+    .acceso-btn .ico { font-size: 1.4rem; display: block; margin-bottom: 0.3rem; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <h1>Consejo Regional Metropolitano de Santiago</h1>
+    <p>Visor ciudadano de actas, acuerdos y actividad del CORE Metropolitano</p>
+    <nav>
+      <a href="/" class="active">Inicio</a>
+      <a href="/sesiones.html">Sesiones</a>
+      <a href="/acuerdos.html">Acuerdos</a>
+      <a href="/comisiones.html">Comisiones</a>
+      <a href="/asistencia.html">Asistencia</a>
+      <a href="/varios.html">Varios</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h2>Transparencia del Consejo Regional</h2>
+    <p>
+      Plataforma de consulta ciudadana sobre la actividad del Consejo Regional Metropolitano de Santiago (CORE).
+      Aqu&iacute; podr&aacute;s revisar las sesiones plenarias, acuerdos aprobados, distribuci&oacute;n de fondos
+      regionales (FNDR, FRIL), asistencia de consejeras y consejeros, e informes de las comisiones permanentes.
+    </p>
+    <div class="fuente">
+      La informaci&oacute;n presentada se obtiene desde las actas oficiales del Consejo Regional Metropolitano
+      y se procesa para facilitar la consulta ciudadana.
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="dashboard" class="loading">Cargando estad&iacute;sticas...</div>
+  </div>
+
+  <script type="module" src="/js/dashboard.js"></script>
+</body>
+</html>

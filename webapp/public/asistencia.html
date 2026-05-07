@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asistencia - CORE Metropolitano</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>Consejo Regional Metropolitano de Santiago</h1>
+    <p>Visor ciudadano de actas, acuerdos y actividad del CORE Metropolitano</p>
+    <nav>
+      <a href="/">Inicio</a>
+      <a href="/sesiones.html">Sesiones</a>
+      <a href="/acuerdos.html">Acuerdos</a>
+      <a href="/comisiones.html">Comisiones</a>
+      <a href="/asistencia.html" class="active">Asistencia</a>
+      <a href="/varios.html">Varios</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2 style="margin-bottom:0.3rem; color:var(--primary)">Asistencia de Consejeras y Consejeros</h2>
+    <p style="margin-bottom:1.5rem; color:var(--text-light); font-size:0.9rem">
+      Registro de asistencia a las sesiones plenarias del Consejo Regional Metropolitano de Santiago.
+    </p>
+
+    <div id="stats" class="stats"></div>
+    <div id="grafico"></div>
+    <div id="detalle" style="display:none"></div>
+  </div>
+
+  <script type="module" src="/js/asistencia.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "core-santiago",
+  "version": "1.0.0",
+  "description": "Visor de actas del Consejo Regional Metropolitano de Santiago",
+  "type": "module",
+  "scripts": {
+    "start": "node -r dotenv/config server.js dotenv_config_path=../.env"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "pg": "^8.13.0"
+  }
+}

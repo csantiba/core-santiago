@@ -1,0 +1,243 @@
+:root {
+  --primary: #0e3a5f;
+  --primary-light: #2980b9;
+  --accent: #e67e22;
+  --bg: #f5f7fa;
+  --card: #ffffff;
+  --text: #2c3e50;
+  --text-light: #7f8c8d;
+  --border: #e0e4e8;
+  --success: #27ae60;
+  --warning: #f39c12;
+  --danger: #c0392b;
+  --radius: 8px;
+  --shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* --- Header --- */
+.site-header {
+  background: var(--primary);
+  color: white;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+}
+.site-header h1 { font-size: 1.5rem; font-weight: 600; }
+.site-header p { opacity: 0.85; font-size: 0.9rem; margin-top: 0.2rem; }
+.site-header nav { margin-top: 0.8rem; display: flex; gap: 1.4rem; flex-wrap: wrap; }
+.site-header nav a { color: rgba(255,255,255,0.9); text-decoration: none; font-size: 0.9rem; padding-bottom: 2px; border-bottom: 2px solid transparent; }
+.site-header nav a:hover, .site-header nav a.active { border-bottom-color: white; color: white; }
+
+/* --- Container --- */
+.container { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+
+/* --- Cards --- */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border-left: 4px solid var(--primary-light);
+  transition: box-shadow 0.2s;
+}
+.card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+.card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+.card h3 a { color: var(--primary); text-decoration: none; }
+.card h3 a:hover { text-decoration: underline; }
+.card .meta { font-size: 0.85rem; color: var(--text-light); margin-bottom: 0.5rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+.card .meta span { display: inline-flex; align-items: center; gap: 0.3rem; }
+.card .resumen { font-size: 0.93rem; color: #444; }
+
+/* --- Badges --- */
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+.badge-primary { background: var(--primary-light); color: white; }
+.badge-ext { background: var(--accent); color: white; }
+.badge-cat { background: #eaf2f8; color: var(--primary); border: 1px solid #d4e6f1; }
+.badge-comision { background: #f5eef8; color: #6c3483; border: 1px solid #e8daef; }
+.badge-unanimidad { background: #d5f5e3; color: #1e8449; }
+.badge-mayoria { background: #fef9e7; color: #b7950b; }
+.badge-rechazado { background: #fadbd8; color: #c0392b; }
+.badge-presente { background: #d5f5e3; color: #1e8449; }
+.badge-ausente { background: #fef9e7; color: #b7950b; }
+.badge-licencia { background: #eaf2f8; color: var(--primary); }
+.badge-inhabilidad { background: #fadbd8; color: #c0392b; }
+
+/* --- Filters --- */
+.filters {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  align-items: end;
+}
+.filters .field { display: flex; flex-direction: column; gap: 0.2rem; }
+.filters label { font-size: 0.78rem; font-weight: 600; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; }
+.filters input, .filters select {
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  background: white;
+}
+.filters input:focus, .filters select:focus { outline: none; border-color: var(--primary-light); box-shadow: 0 0 0 3px rgba(41,128,185,0.15); }
+.btn {
+  padding: 0.5rem 1.2rem;
+  background: var(--primary-light);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.btn:hover { background: var(--primary); }
+.btn-outline { background: transparent; color: var(--primary-light); border: 1px solid var(--primary-light); }
+.btn-outline:hover { background: var(--primary-light); color: white; }
+
+/* --- Session detail --- */
+.sesion-header {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  border-top: 4px solid var(--primary);
+}
+.sesion-header h2 { font-size: 1.4rem; color: var(--primary); }
+.sesion-header .resumen-general {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #eaf2f8;
+  border-radius: 6px;
+  font-size: 0.93rem;
+}
+.asistencia { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+.asistencia > div { background: var(--card); border-radius: var(--radius); padding: 1rem; box-shadow: var(--shadow); }
+.asistencia h4 { font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); }
+.asistencia ul { list-style: none; }
+.asistencia li { padding: 0.3rem 0; font-size: 0.88rem; }
+
+/* --- Topic accordion --- */
+.tema {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 0.8rem;
+  overflow: hidden;
+}
+.tema-header {
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  gap: 0.8rem;
+}
+.tema-header:hover { background: #f8f9fa; }
+.tema-header h4 { font-size: 0.95rem; flex: 1; }
+.tema-header .seccion-label { font-size: 0.8rem; color: var(--primary-light); font-weight: 600; white-space: nowrap; }
+.tema-header .arrow { transition: transform 0.2s; font-size: 0.8rem; color: var(--text-light); }
+.tema.open .tema-header .arrow { transform: rotate(90deg); }
+.tema-body { display: none; padding: 0 1.5rem 1.5rem; border-top: 1px solid var(--border); }
+.tema.open .tema-body { display: block; }
+.tema-body .resumen { margin-top: 0.8rem; font-size: 0.9rem; color: #555; }
+.tema-body .cats { margin-top: 0.5rem; display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.tema-body .presentado { margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-light); }
+.tema-body .presentado strong { color: var(--primary); }
+
+/* --- Acuerdo box --- */
+.acuerdo-box {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border-left: 3px solid var(--success);
+}
+.acuerdo-box h5 { font-size: 0.85rem; color: var(--primary); margin-bottom: 0.4rem; }
+.acuerdo-box p { font-size: 0.88rem; }
+.acuerdo-box .acuerdo-meta { margin-top: 0.5rem; font-size: 0.82rem; color: var(--text-light); display: flex; gap: 1rem; flex-wrap: wrap; }
+.acuerdo-box .votos-grid { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 0.5rem; font-size: 0.82rem; }
+.acuerdo-box .votos-grid span { padding: 0.15rem 0.5rem; border-radius: 4px; }
+
+/* --- Interventions --- */
+.intervencion { margin-top: 0.6rem; padding: 0.6rem; background: #fef9e7; border-radius: 6px; font-size: 0.88rem; }
+.intervencion strong { color: var(--primary); }
+
+/* --- Agreements table --- */
+.acuerdos-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; background: var(--card); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.acuerdos-table th { background: var(--primary); color: white; padding: 0.7rem 1rem; text-align: left; font-weight: 500; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+.acuerdos-table td { padding: 0.7rem 1rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+.acuerdos-table tr:hover td { background: #f8f9fa; }
+.acuerdos-table .monto { text-align: right; white-space: nowrap; font-weight: 500; }
+.acuerdos-table .acuerdo-row .arrow { font-size: 0.7rem; transition: transform 0.2s; display: inline-block; margin-left: 0.4rem; color: var(--text-light); }
+.acuerdos-table .acuerdo-row.open .arrow { transform: rotate(90deg); }
+.acuerdo-detail-body { padding: 0.5rem; background: #f8f9fa; border-left: 3px solid var(--success); border-radius: 4px; }
+.acuerdo-detail-body p { font-size: 0.88rem; color: #444; margin: 0; white-space: pre-line; }
+.acuerdo-detail-body .acuerdo-meta { margin-top: 0.5rem; font-size: 0.82rem; color: var(--text-light); display: flex; gap: 1rem; flex-wrap: wrap; }
+
+/* --- Stats bar --- */
+.stats {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.stat-box {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1rem 1.5rem;
+  flex: 1;
+  min-width: 150px;
+  text-align: center;
+}
+.stat-box .num { font-size: 2rem; font-weight: 700; color: var(--primary); }
+.stat-box .label { font-size: 0.8rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* --- Back link --- */
+.back { display: inline-block; margin-bottom: 1rem; color: var(--primary-light); text-decoration: none; font-size: 0.9rem; }
+.back:hover { text-decoration: underline; }
+
+/* --- Loading --- */
+.loading { text-align: center; padding: 3rem; color: var(--text-light); }
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .site-header { padding: 1rem; }
+  .container { padding: 0.5rem; }
+  .filters { flex-direction: column; align-items: stretch; }
+  .sesion-header { padding: 1rem; }
+  .tema-body { padding: 0 1rem 1rem; }
+  .asistencia { grid-template-columns: 1fr; }
+  .acuerdos-table { font-size: 0.8rem; }
+  .acuerdos-table th, .acuerdos-table td { padding: 0.5rem; }
+  .stats { flex-direction: column; }
+}
+
+@media print {
+  .site-header { background: white; color: black; box-shadow: none; }
+  .filters, .btn { display: none; }
+  .card, .tema, .sesion-header { box-shadow: none; border: 1px solid #ddd; }
+}
